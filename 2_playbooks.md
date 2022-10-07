@@ -14,7 +14,7 @@ The inventory is a YAML file that has a list of all the hosts that plays can be 
 
 ## Tasks & Modules
 Tasks are parts of the play that actually get executed on the remote machine.<br/>
-Tasks utilise **modules** to carry out particular tasks.<br/>
+A task is a wrapper around modules which consists of metadata that Ansible ses to execute the module in the way you want.<br/>
 
 **Modules**
 Modules are wrapprs around code designed for a specific purpose. <br/>
@@ -31,4 +31,10 @@ Modules are called from tasks.<br/>
     - conditionals
     - loops
 <br/>
+
 ![Tasks](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/tasks.png)
+
+# Plays
+- Plays consist of tasks, hosts variables and additional settings
+- Playbooks can have multiple plays
+
