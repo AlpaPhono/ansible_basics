@@ -38,3 +38,5 @@ Modules are called from tasks.<br/>
 - Plays consist of tasks, hosts variables and additional settings
 - Playbooks can have multiple plays
 
+![Tasks](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/play.png)
+
