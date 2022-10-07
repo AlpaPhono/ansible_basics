@@ -30,4 +30,4 @@ Modules are called from tasks.<br/>
     - ignore errors
     - conditionals
     - loops
-![Tasks]()
+![Tasks](https://github.com/AlpaPhono/ansible_basics/blob/main/tasks.png)
