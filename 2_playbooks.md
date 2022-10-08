@@ -22,6 +22,17 @@ Modules are wrapprs around code designed for a specific purpose. <br/>
 - Git module allows interaction with Git services
 - Ping module allows you to pig services
 
+Most modules accept arguments as key=value pairs<br/>
+<br/>
+Ansible has information on its modules in its documentation letting the user know which keys are required and which are optional.<br/>
+
+### Custom Modules 
+- Custom modules can be created with any language that can write JSON to STDOUT
+    - pyhton
+    - powershell
+    - bash
+    - ruby
+
 **Tasks**
 Modules are called from tasks.<br/>
 - Tasks consist of a module and some metadata
