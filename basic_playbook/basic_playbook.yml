@@ -33,5 +33,65 @@
     - name: Restart Apache
       service:
         name: apache2
-        state: restart
+        state: restarted
     
+
+    # Database Tasks 
+
+    - name: Install python mysql lib
+      apt:
+        name: python-myswldb
+        state: present 
+
+    - name:
+      myswl_user:
+        name: appuser
+        password: ijonkn
+        priv: "*.*:ALL"
+        state: present
+
+    - name:
+      myswl-_db:
+        name: appdata
+        state: present
+
+    # app tasks
+    - name: Install pip
+      apt:
+        name: python-pip
+        state: present
+
+    - name: Download app
+      git:
+        repo: url
+        dest: /tmp/webapp/path
+    
+    - name: Install app requirements
+      pip:
+        requirements: /tmp/webapp/path
+
+    # site install / configure 
+
+  - name: Copy app to apache owner folder 
+    shell: "rsync -av path"
+
+  - name: Install mod-wsgi
+    apt:
+      name: libapache2-mod-wsgi
+      state: present
+  
+  - name: Copy the apache configuration file
+    copy:
+      src: "apache.com"
+      dest: /etc/apache2/sites-available/000-default.conf
+
+  - name: Restart Apache
+    service:
+      name: apache2
+      status: restarted
+
+
+
+
+# A play book with one play and several tasks
+# 
