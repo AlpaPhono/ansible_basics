@@ -46,7 +46,15 @@ Handlers only run when notified.<br/>
 > Variables that are predefined and are mostly about the Ansible host
 - All standard Ansible facts can be viewed by running *ansible localhost -m setup*
 
-## Hostvars 
-> Facts but specific to external hosts.
+### Hostvars 
+> Facts but specific to external hosts. <br/>
+
+## Templates
+> A module that can be used in a play book<br/>
+>Takes files and uses Jinja2 syntax to apply any templating to them and replace them with Ansible values.<br/>
+
+- Allows the use of ansible variables in a non yaml file
+![templating](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/templating.png)
+
 
 
