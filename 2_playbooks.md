@@ -1,6 +1,8 @@
 # Playbooks
 
 Used for the most of the configuration in Ansible. They can  be used to manage configurations and deployments on remote machines.<br/>
+- Written in YAML language .ylm<br/>
+- whitespace sensitive
 
 # Configuration
 Play books contain a lsit of *Plays* <br/>
@@ -32,6 +34,15 @@ Ansible has information on its modules in its documentation letting the user kno
     - powershell
     - bash
     - ruby
+
+The language the custom module is written in needs to be on the host as ansible copies the code over to the host and executes the code.<br/>
+**Example**
+- Use ansible test module as a template for your own.
+- Download ansible source code to get it
+![sourcecode install](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/ansiblesourcecode.png)
+<br/>
+- run a script so that environment variables are configured for development
+![sourcecode install](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/ansibleenvironmentset.png)
 
 **Tasks**
 Modules are called from tasks.<br/>
