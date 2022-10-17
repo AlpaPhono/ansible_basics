@@ -1,0 +1,47 @@
+--- 
+- hosts: lamp
+  remote_user: ubuntu
+  become: true
+  vars:
+    app_download_dest: /temp/webapp
+    app_dest: /var/www/webapp
+    app_repo: https://github.com/whelmed/ansible_demo.git
+  - tasks:
+
+   # app tasks
+    - name: Install pip
+      apt:
+        name: python-pip
+        state: present
+
+    - name: Download app
+      git:
+        repo: "{{ app_repo }}"
+        dest: "{{ app_download_dest }}"
+    
+    - name: Install app requirements
+      pip:
+        requirements: "{{ app_download_dest }}/requirements.txt"
+
+    # site install / configure 
+ 
+    - name: Copy app to apache owner folder 
+      shell: "rsync -av path {{ app_download_dest }}/app/ {{ app_dest }}"
+
+    - name: Install mod-wsgi
+      apt:
+        name: libapache2-mod-wsgi
+        state: present
+    
+    - name: Copy the apache configuration file
+      copy:
+        src: "apache.com"
+        dest: /etc/apache2/sites-available/000-default.conf
+      notify: restart apache # calling the handler task
+
+
+handlers:
+  - name: restart apache
+    services:
+    name: apache2
+    state: restarted
