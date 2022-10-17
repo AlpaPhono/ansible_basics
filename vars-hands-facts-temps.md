@@ -45,10 +45,13 @@ Handlers only run when notified.<br/>
 ## Facts 
 > Variables that are predefined and are mostly about the Ansible host
 - All standard Ansible facts can be viewed by running *ansible localhost -m setup*
+- used for dynamic variables.
 
 ### Hostvars 
 > Facts but specific to external hosts. <br/>
 
+- Both facts and hostvars are useful when using conditionals 
+<br/>
 ## Templates
 > A module that can be used in a play book<br/>
 >Takes files and uses Jinja2 syntax to apply any templating to them and replace them with Ansible values.<br/>
