@@ -18,7 +18,8 @@
 
 ### Variables
 - Can be set in the original playbook under vars
-- or can be set main.yml under the vars folder within the role
+- or can be set main.yml under the defaults folder within the role
+    - default variables have the lowest precedence and be overwriiten if a value is added anywhere else.
 <br/>
 ![role vars](https://github.com/AlpaPhono/ansible_basics/blob/main/image_resources/role_vars.png)
 

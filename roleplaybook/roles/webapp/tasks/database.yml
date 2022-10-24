@@ -1,0 +1,18 @@
+---
+# Database Tasks
+- name: Install python mysql lib      # installs my sql library
+      apt:
+        name: python-myswldb
+        state: present 
+
+- name: Creating sql user                     # creates a user called appuser in  
+  mysql_user:
+    name: appuser
+    password: ijonkn
+    priv: "*.*:ALL"
+    state: present
+
+- name: Creating sql Schema                                # Creates a database schema       
+  mysql_db:
+    name: appdata
+    state: present

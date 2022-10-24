@@ -1,0 +1,6 @@
+---
+# defaults file for webapp
+
+app_download_dest: /temp/webapp
+app_dest: /var/www/webapp
+app_repo: https://github.com/whelmed/ansible_demo.git

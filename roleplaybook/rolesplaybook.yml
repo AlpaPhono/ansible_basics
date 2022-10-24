@@ -4,90 +4,13 @@
   become: true
   roles:
     - lamp
+    - webapp
 
-  vars:
-    app_download_dest: /temp/webapp
-    app_dest: /var/www/webapp
-    app_repo: https://github.com/whelmed/ansible_demo.git
   - tasks:
 
-   tasks:
-    - name: Install packages
-      - apt:
-          name: "{{ item }}"            # syntax for variable rather than a single value becauuse multiple packages will be installed.
-          state: present                # Means you want the packages installed
-          update_cache: true            # Updates apt cache before installing anything. (good practice)
-        with_items:                     # with_items: property allows you to loop over a task with its required list of arguements
-          "{{ pcakcages }}"
-
-
-    - name: Start services
-      services:                         # service module 
-        name: "{{ item }}"
-        state: running
-      with_items:
-        - apache2
-        - mysql
-
-    - name: Enable modssl
-      shell: a2enmod ssl                # shell module 
-
-    - name: Enable default HTTPS site
-      shell: a2ensite defualt-ssl
-
-    - name: Restart Apache
-      service:
-        name: apache2
-        state: restarted
-    
-
     # Database Tasks 
-
-    - name: Install python mysql lib      # installs my sql library
-      apt:
-        name: python-myswldb
-        state: present 
-
-    - name:                               # creates a user called appuser in  
-      myswl_user:
-        name: appuser
-        password: ijonkn
-        priv: "*.*:ALL"
-        state: present
-
-    - name:                                # Creates a database schema       
-      myswl-_db:
-        name: appdata
-        state: present
         
    # app tasks
-    - name: Install pip
-      apt:
-        name: python-pip
-        state: present
 
-    - name: Download app
-      git:
-        repo: "{{ app_repo }}"
-        dest: "{{ app_download_dest }}"
-    
-    - name: Install app requirements
-      pip:
-        requirements: "{{ app_download_dest }}/requirements.txt"
-
-    # site install / configure 
+   # site install / configure 
  
-    - name: Copy app to apache owner folder 
-      shell: "rsync -av path {{ app_download_dest }}/app/ {{ app_dest }}"
-
-    - name: Install mod-wsgi
-      apt:
-        name: libapache2-mod-wsgi
-        state: present
-    
-    - name: Copy the apache configuration file
-      template:                                               # module changed from copy to template to make changes readable in template file
-        src: "apache.com"
-        dest: /etc/apache2/sites-available/000-default.conf
-      notify: restart apache                                  # calling the handler task
-

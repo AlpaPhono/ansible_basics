@@ -1,0 +1,11 @@
+---
+hosts: localhost
+gather_facts: false
+connections: local
+become: yes
+
+tasks:
+
+  - name: Cause error
+      command: '/bin/false'   # this will cause an error.
+      ignore_errors: true 

@@ -1,0 +1,16 @@
+---
+# Applicaion tasks
+
+- name: Install pip
+      apt:
+        name: python-pip
+        state: present
+
+- name: Download app
+  git:
+    repo: "{{ app_repo }}"
+    dest: "{{ app_download_dest }}"
+
+- name: Install app requirements
+  pip:
+    requirements: "{{ app_download_dest }}/requirements.txt"
