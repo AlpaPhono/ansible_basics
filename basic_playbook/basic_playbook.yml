@@ -16,6 +16,7 @@
           - mysql-client
           - libapache2-mod-wsgi
 
+
     - name: Start services
       services:                         # service module 
         name: "{{ item }}"
@@ -38,51 +39,52 @@
 
     # Database Tasks 
 
-    - name: Install python mysql lib
+    - name: Install python mysql lib      # installs my sql library
       apt:
         name: python-myswldb
         state: present 
 
-    - name:
+    - name:                               # creates a user called appuser in  
       myswl_user:
         name: appuser
         password: ijonkn
         priv: "*.*:ALL"
         state: present
 
-    - name:
+    - name:                                # Creates a database schema       
       myswl-_db:
         name: appdata
         state: present
 
+
     # app tasks
-    - name: Install pip
+    - name: Install pip                   # Installs pip (python package manager)
       apt:
         name: python-pip
         state: present
 
-    - name: Download app
+    - name: Download app                                      # Downloads the application to a user folder
       git:
-        repo: url
+        repo: httpws://github.com/whelmed/amsible_demo.git
         dest: /tmp/webapp/path
     
-    - name: Install app requirements
+    - name: Install app requirements                          # Installs app requirements so that it can function            
       pip:
-        requirements: /tmp/webapp/path
+        requirements: /tmp/webapp/requirements.txt path
 
     # site install / configure 
 
-  - name: Copy app to apache owner folder 
-    shell: "rsync -av path"
+  - name: Copy app to apache owner folder                   # uses the shell module to compy the application from one module to another using rsync (a file transfer program)
+    shell: "rsync -av /tmp/webapp/ /var/www/webapp"
 
-  - name: Install mod-wsgi
+  - name: Install mod-wsgi                                  # Installs mod-wsgi (a module that allows python to run under apache)
     apt:
       name: libapache2-mod-wsgi
       state: present
   
-  - name: Copy the apache configuration file
+  - name: Copy the apache configuration file                # Copy apache configuration file from control machine to the lamp server
     copy:
-      src: "apache.com"
+      src: "apache.conf"
       dest: /etc/apache2/sites-available/000-default.conf
 
   - name: Restart Apache
