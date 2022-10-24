@@ -14,3 +14,6 @@ In this example we converted the restart apache task into a handler as it was us
 
 # Templates 
 They use templates on the apache config file however this is just for demonstration and so does not currently reflect the full changes.<br/>
+
+- The paths used in the tempolate file were replaced with variable names.<br/>
+- Module that copies config gile was replaced with template module
