@@ -1,0 +1,30 @@
+---
+# tasks file for lamp
+
+- name: Install packages
+    - apt:
+        name: "{{ item }}"            # syntax for variable rather than a single value becauuse multiple packages will be installed.
+        state: present                # Means you want the packages installed
+        update_cache: true            # Updates apt cache before installing anything. (good practice)
+      with_items: "{{ packages }}"                     # with_items: property allows you to loop over a task with its required list of arguements
+
+
+
+- name: Start services
+  service:                         # service module 
+    name: "{{ item }}"
+    state: running
+  with_items: "{{ services }}"
+
+- name: Enable modssl
+  shell: a2enmod ssl                # shell module 
+
+- name: Enable default HTTPS site
+  shell: a2ensite defualt-ssl
+
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted
+  notify: restart apache
+

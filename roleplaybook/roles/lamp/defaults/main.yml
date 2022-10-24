@@ -1,0 +1,12 @@
+---
+packages:
+  - apache2
+  - mysql-server
+  - mysql-common
+  - mysql-client
+  - libapache2-mod-wsgi
+
+services:
+  - apache2
+  - mysql
+# defaults file for lamp
